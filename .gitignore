@@ -1,0 +1,7 @@
+src/img/icons
+src/css/style.css
+src/**/*.map
+src/js/scripts.js
+src/libs/
+node_modules
+build
