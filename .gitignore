@@ -1,7 +1,14 @@
-src/img/icons
+src/img/sprite-parts/**/*
+!src/img/sprite-parts/.gitkeep
+
 src/css/style.css
+
 src/**/*.map
+
 src/js/scripts.js
-src/libs/
+
+src/libs/**/*
+!src/libs/.gitkeep
+
 node_modules
 build

@@ -3,10 +3,9 @@
 	"version": "1.0.0",
 	"description": "Template project for development with MLUT",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"gulp": "./node_modules/gulp/bin/gulp.js",
 		"build": "./node_modules/gulp/bin/gulp.js build",
-		"mlut-include-css": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.css"
+		"mlut-build-css": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.css"
 	},
 	"author": "mr150",
 	"license": "MIT",
