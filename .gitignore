@@ -9,6 +9,7 @@ src/js/scripts.js
 
 src/libs/**/*
 !src/libs/.gitkeep
+!src/libs/mlut.*
 
 node_modules
 build

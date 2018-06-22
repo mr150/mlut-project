@@ -5,7 +5,9 @@
 	"scripts": {
 		"gulp": "./node_modules/gulp/bin/gulp.js",
 		"build": "./node_modules/gulp/bin/gulp.js build",
-		"mlut-build-css": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.css"
+		"mlut-git-ignore": "echo '\nsrc/core-blocks\nsrc/core-utils\nsrc/sass/base/_normalize.scss' >> .gitignore && git reset HEAD src/core-utils/ src/core-blocks/ src/sass/base/_normalize.scss build",
+		"mlut-build-css": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.css && git reset HEAD build",
+		"mlut-build-scss": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.scss && git reset HEAD build"
 	},
 	"author": "mr150",
 	"license": "MIT",
