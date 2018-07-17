@@ -5,12 +5,17 @@
 	"scripts": {
 		"gulp": "./node_modules/gulp/bin/gulp.js",
 		"build": "./node_modules/gulp/bin/gulp.js build",
-		"mlut-git-ignore": "echo '\nsrc/core-blocks\nsrc/core-utils\nsrc/sass/base/_normalize.scss' >> .gitignore && git reset HEAD src/core-utils/ src/core-blocks/ src/sass/base/_normalize.scss build",
-		"mlut-build-css": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.css && git reset HEAD build",
-		"mlut-build-scss": "./node_modules/gulp/bin/gulp.js build && cp build/css/style.min.css src/libs/mlut.min.scss && git reset HEAD build"
+		"mlut-get-css": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/",
+		"mlut-get-scss": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/mlut.min.scss",
+		"mlut-scss": "cat src/sass/mlut.scss > src/sass/style.scss && rm src/sass/mlut.scss",
+		"mlut-src": "cp node_modules/mlut/src/core-* src/ -r && cp node_modules/mlut/src/sass src/ -r"
 	},
 	"author": "mr150",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://bitbucket.org/MrZidan150/mlut-project/"
+	},
 	"devDependencies": {
 		"browser-sync": "^2.23.6",
 		"del": "^3.0.0",
@@ -24,6 +29,7 @@
 		"gulp-rename": "^1.2.2",
 		"gulp-rigger": "^0.5.8",
 		"gulp-sass": "^3.1.0",
+		"gulp-size": "^3.0.0",
 		"gulp-sourcemaps": "^2.6.4",
 		"gulp-stylelint": "^7.0.0",
 		"gulp-tabify": "0.0.2",
@@ -31,134 +37,5 @@
 		"imagemin-mozjpeg": "^7.0.0",
 		"imagemin-pngquant": "^5.0.1",
 		"stylelint": "^9.1.3"
-	},
-	"dependencies": {},
-	"browserslist": [
-		"> 0.08%",
-		"last 5 versions",
-		"not < 0.08%",
-		"ie 8-11",
-		"chrome 41",
-		"ios 7-8",
-		"firefox esr",
-		"android 4.1-4.4.4",
-		"not ie < 8"
-	],
-	"stylelint": {
-		"rules": {
-			"at-rule-name-case": "lower",
-			"at-rule-name-space-after": "always",
-			"at-rule-semicolon-newline-after": "always",
-			"block-closing-brace-empty-line-before": "never",
-			"block-closing-brace-newline-after": [
-				"always",
-				{
-					"ignoreAtRules": [
-						"if",
-						"else"
-					]
-				}
-			],
-			"block-closing-brace-newline-before": "always",
-			"block-opening-brace-newline-after": "always",
-			"block-opening-brace-space-before": "always",
-			"color-no-invalid-hex": true,
-			"color-hex-case": "lower",
-			"comment-no-empty": true,
-			"declaration-bang-space-after": "never",
-			"declaration-bang-space-before": "always",
-			"declaration-colon-space-after": "always-single-line",
-			"declaration-colon-space-before": "never",
-			"declaration-block-semicolon-newline-after": "always",
-			"declaration-block-semicolon-newline-before": "never-multi-line",
-			"declaration-block-semicolon-space-after": "always-single-line",
-			"declaration-block-semicolon-space-before": "never",
-			"declaration-block-trailing-semicolon": "always",
-			"declaration-block-no-shorthand-property-overrides": true,
-			"declaration-property-value-blacklist": {
-				"outline": [
-					"none"
-				]
-			},
-			"indentation": "tab",
-			"font-family-no-duplicate-names": true,
-			"font-family-no-missing-generic-family-keyword": true,
-			"font-family-name-quotes": "always-where-recommended",
-			"font-weight-notation": "numeric",
-			"function-calc-no-unspaced-operator": true,
-			"function-linear-gradient-no-nonstandard-direction": true,
-			"function-comma-space-after": "always-single-line",
-			"function-comma-space-before": "never",
-			"function-comma-newline-after": "always-multi-line",
-			"function-comma-newline-before": "never-multi-line",
-			"function-max-empty-lines": 0,
-			"function-name-case": "lower",
-			"function-url-quotes": "always",
-			"function-whitespace-after": "always",
-			"function-parentheses-space-inside": "never",
-			"keyframe-declaration-no-important": true,
-			"number-leading-zero": "always",
-			"number-no-trailing-zeros": true,
-			"media-feature-colon-space-after": "always",
-			"media-feature-colon-space-before": "never",
-			"media-feature-name-case": "lower",
-			"media-feature-parentheses-space-inside": "never",
-			"media-feature-range-operator-space-after": "always",
-			"media-feature-range-operator-space-before": "always",
-			"media-feature-name-no-unknown": true,
-			"media-query-list-comma-newline-after": "always-multi-line",
-			"media-query-list-comma-newline-before": "never-multi-line",
-			"media-query-list-comma-space-after": "always-single-line",
-			"media-query-list-comma-space-before": "never-single-line",
-			"max-empty-lines": 2,
-			"no-duplicate-at-import-rules": true,
-			"no-duplicate-selectors": true,
-			"no-empty-source": true,
-			"no-extra-semicolons": true,
-			"no-eol-whitespace": true,
-			"no-invalid-double-slash-comments": true,
-			"property-case": "lower",
-			"property-no-unknown": true,
-			"rule-empty-line-before": [
-				"always",
-				{
-					"except": [
-						"first-nested"
-					],
-					"ignore": [
-						"after-comment"
-					]
-				}
-			],
-			"selector-attribute-brackets-space-inside": "never",
-			"selector-attribute-operator-space-after": "never",
-			"selector-attribute-operator-space-before": "never",
-			"selector-attribute-quotes": "always",
-			"selector-combinator-space-after": "always",
-			"selector-combinator-space-before": "always",
-			"selector-pseudo-class-case": "lower",
-			"selector-pseudo-class-parentheses-space-inside": "never",
-			"selector-pseudo-element-case": "lower",
-			"selector-type-case": "lower",
-			"selector-list-comma-newline-after": "always",
-			"selector-list-comma-newline-before": "never-multi-line",
-			"selector-pseudo-class-no-unknown": true,
-			"selector-pseudo-element-no-unknown": true,
-			"selector-type-no-unknown": true,
-			"selector-max-id": 0,
-			"selector-max-empty-lines": 0,
-			"selector-max-type": 1,
-			"selector-no-qualifying-type": true,
-			"string-quotes": "double",
-			"string-no-newline": true,
-			"unit-case": "lower",
-			"unit-no-unknown": true,
-			"value-list-comma-newline-after": "always-multi-line",
-			"value-list-comma-newline-before": "never-multi-line",
-			"value-list-comma-space-after": "always-single-line",
-			"value-list-comma-space-before": "never",
-			"value-list-max-empty-lines": 0,
-			"value-keyword-case": "lower"
-		}
 	}
 }

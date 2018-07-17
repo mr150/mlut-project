@@ -1,3 +1,10 @@
+src/core-blocks
+src/core-utils
+src/sass/base
+src/sass/mlut.scss
+src/sass/includes/**/*
+!src/sass/includes/_settings.scss
+
 src/img/sprite-parts/**/*
 !src/img/sprite-parts/.gitkeep
 
@@ -12,4 +19,4 @@ src/libs/**/*
 !src/libs/mlut.*
 
 node_modules
-build
+dist

@@ -14,13 +14,14 @@ var gulp = require("gulp"),
 		stylelint = require("gulp-stylelint"),
 		groupMedia = require("gulp-group-css-media-queries"),
 		tabify = require("gulp-tabify"),
+		size = require("gulp-size"),
 		sourcemaps = require("gulp-sourcemaps"),
 		autoprefixer = require("gulp-autoprefixer");
 
 var dirs = {
 	src: "src/",
 	libs: "src/libs/",
-	build: "build/"
+	build: "dist/"
 };
 
 var path = {
@@ -48,6 +49,8 @@ var files = {
 	pug: "**/*.pug",
 	img: "*.{png,jpg,svg}",
 	html: "**/*.html",
+	distCss: "style.min.css",
+	distJs: "script.min.js",
 	all: "**/*"
 };
 
@@ -71,12 +74,17 @@ path = Object.assign({
 }, path);
 
 var servConfig = {
-		server: {
-			baseDir: "src"
-		},
-		notify: false,
-		open: false
-};
+	server: {
+		baseDir: "src"
+	},
+	notify: false,
+	open: false
+},
+		sizeConfig = {
+			gzip: true,
+			pretty: false,
+			showFiles: true
+		};
 
 gulp.task("style", ["css-lint"], function(){
 	return gulp.src(path.src.sass + "style.scss")
@@ -98,7 +106,8 @@ gulp.task("style", ["css-lint"], function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename("style.min.css"))
+		.pipe(rename(files.distCss))
+		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.src.css))
@@ -127,7 +136,8 @@ gulp.task("scripts", function(){
 		.pipe(rename("scripts.js"))
 		.pipe(gulp.dest(path.src.js))
 		.pipe(uglify())
-		.pipe(rename("script.min.js"))
+		.pipe(rename(files.distJs))
+		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.src.js))
@@ -146,10 +156,16 @@ gulp.task("server", function(){
 	browserSync(servConfig);
 });
 
+gulp.task("html", function(){
+	return gulp.src(dirs.build + files.html)
+		.pipe(size(sizeConfig))
+		.pipe(browserSync.stream());
+});
+
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
 	gulp.watch(path.watch.styles, ["style"]);
 	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, browserSync.reload);
+	gulp.watch(path.watch.html, ["html"]);
 	gulp.watch(path.watch.js, ["scripts"]);
 });
 
@@ -162,11 +178,12 @@ gulp.task("imgmin", function(){
 			pngquant({quality: "85"}),
 			imagemin.svgo()
 		]))
+		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.build.img));
 });
 
 gulp.task("clear", function(){
-	return del.sync("build");
+	return del.sync(dirs.build);
 });
 
 gulp.task("build", ["clear", "style", "pug", "scripts", "imgmin"], function(){
