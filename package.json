@@ -5,6 +5,8 @@
 	"scripts": {
 		"gulp": "./node_modules/gulp/bin/gulp.js",
 		"build": "./node_modules/gulp/bin/gulp.js build",
+		"imgmin": "./node_modules/gulp/bin/gulp.js imgmin",
+		"mlut-dist": "cp node_modules/mlut/dist src/libs/mlut -r",
 		"mlut-get-css": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/",
 		"mlut-get-scss": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/mlut.min.scss",
 		"mlut-scss": "cat src/sass/mlut.scss > src/sass/style.scss && rm src/sass/mlut.scss",
@@ -36,6 +38,7 @@
 		"gulp-uglify": "^3.0.0",
 		"imagemin-mozjpeg": "^7.0.0",
 		"imagemin-pngquant": "^5.0.1",
+		"mlut": "bitbucket:mrzidan150/mlut-lib",
 		"stylelint": "^9.1.3"
 	}
 }
