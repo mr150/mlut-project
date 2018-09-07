@@ -57,7 +57,7 @@ var files = {
 path = Object.assign({
 	watch: {
 		styles: [
-			path.src.fonts + "*.css",
+			path.src.fonts + "*.{scss,css}",
 			path.src.blocks + files.styles,
 			path.src.utils + files.styles,
 			dirs.libs + files.styles,
@@ -67,6 +67,7 @@ path = Object.assign({
 		html: dirs.src + files.html,
 		js: [
 			path.src.js + "script.js",
+			path.src.js + "includes/" + files.js,
 			path.src.blocks + files.js,
 			dirs.libs + files.js
 		]
@@ -98,7 +99,7 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(groupMedia())
 		.pipe(autoprefixer({
 			cascade: false,
-			flexbox: "no-2009"
+			flexbox: false
 		}))
 		.pipe(tabify(2, false))
 		.pipe(gulp.dest(path.src.css))
@@ -178,7 +179,10 @@ gulp.task("imgmin", function(){
 			pngquant({quality: "85"}),
 			imagemin.svgo()
 		]))
-		.pipe(size(sizeConfig))
+		.pipe(size({
+			gzip: true,
+			showFiles: true
+		}))
 		.pipe(gulp.dest(path.build.img));
 });
 
@@ -188,7 +192,7 @@ gulp.task("clear", function(){
 
 gulp.task("build", ["clear", "style", "pug", "scripts", "imgmin"], function(){
 	return gulp.src([
-		"!"+path.src.fonts + "*.css",
+		"!"+path.src.fonts + "*.{scss,css}",
 		path.src.fonts + files.all
 	])
 		.pipe(gulp.dest(path.build.fonts));
