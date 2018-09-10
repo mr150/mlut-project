@@ -1,6 +1,6 @@
 {
 	"name": "mlut-project",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Template project for development with MLUT",
 	"scripts": {
 		"gulp": "./node_modules/gulp/bin/gulp.js",
