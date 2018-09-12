@@ -36,6 +36,8 @@
 		"gulp-stylelint": "^7.0.0",
 		"gulp-tabify": "0.0.2",
 		"gulp-uglify": "^3.0.0",
+		"gulp-w3c-html-validation": "0.0.1",
+		"imagemin-guetzli": "^1.0.0",
 		"imagemin-mozjpeg": "^7.0.0",
 		"imagemin-pngquant": "^5.0.1",
 		"mlut": "bitbucket:mrzidan150/mlut-lib",

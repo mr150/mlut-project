@@ -9,12 +9,14 @@ var gulp = require("gulp"),
 		imagemin = require("gulp-imagemin"),
 		pngquant = require("imagemin-pngquant"),
 		mozjpeg = require("imagemin-mozjpeg"),
+		guetzli = require("imagemin-guetzli"),
 		plumber = require("gulp-plumber"),
 		pug = require("gulp-pug"),
 		stylelint = require("gulp-stylelint"),
 		groupMedia = require("gulp-group-css-media-queries"),
 		tabify = require("gulp-tabify"),
 		size = require("gulp-size"),
+		htmlValid = require("gulp-w3c-html-validation"),
 		sourcemaps = require("gulp-sourcemaps"),
 		autoprefixer = require("gulp-autoprefixer");
 
@@ -159,6 +161,11 @@ gulp.task("server", function(){
 
 gulp.task("html", function(){
 	return gulp.src(dirs.build + files.html)
+		.pipe(htmlValid({
+			generateReport: false,
+			reportpath: false,
+			statusPath: "logs/html-validation-status.json"
+		}))
 		.pipe(size(sizeConfig))
 		.pipe(browserSync.stream());
 });
@@ -170,11 +177,9 @@ gulp.task("default", ["server", "style", "pug", "scripts"], function(){
 	gulp.watch(path.watch.js, ["scripts"]);
 });
 
-gulp.task("imgmin", function(){
-	return gulp.src(path.src.img + files.img)
+gulp.task("imgmin", ["jpgmin"], function(){
+	return gulp.src(path.src.img + "*.{png,svg}")
 		.pipe(imagemin([
-			imagemin.jpegtran({progressive: true}),
-			mozjpeg({quality: "85"}),
 			imagemin.optipng({optimizationLevel: 3}),
 			pngquant({quality: "85"}),
 			imagemin.svgo()
@@ -183,6 +188,20 @@ gulp.task("imgmin", function(){
 			gzip: true,
 			showFiles: true
 		}))
+		.pipe(gulp.dest(path.build.img));
+});
+
+gulp.task("jpgmin", function(){
+	return gulp.src(path.src.img + "*.jpg")
+		.pipe(imagemin([
+			guetzli({
+				quality: "90",
+				memlimit: 1024
+			}),
+			mozjpeg({
+				quality: "85"
+			})
+		]))
 		.pipe(gulp.dest(path.build.img));
 });
 
