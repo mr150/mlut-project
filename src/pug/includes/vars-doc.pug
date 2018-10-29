@@ -1,0 +1,47 @@
+//- Short documentation for vars.pug with usage examples
+
+//- 'pageTitle' is page title which will be in <title>.
+//- Setup it before including head.pug. Example:
+	- pageTitle = "Mlut project";
+	include includes/head.pug
+
+//- 'features' is common template for data list.
+//- Usage example:
+	h2 Our features
+	ul.row.wrapper__row
+		- for(i = 0; i < features.length; i++)
+			li.row__col.W2gc_md.W3gc_md
+				h3= features[i].title 
+				p= features[i].descr 
+
+//- 'siteMap' is list template for site map in footer of site. 
+//- Usage example:
+	h2 Site map
+	- for(i = 0; i < siteMap.length; i++)
+		.row__col.W3gc_md
+			h3= siteMap[i].title
+			ul
+				- for(j = 0; j < siteMap[i].list.length; j++)
+					li: a(href=siteMap[i].list[j].link)= siteMap[i].list[j].label
+
+//- 'myForm' is template for list of objects which contains
+//- labels and attributes of inputs. It using in 'formInputs' mixin.
+//- Usage example:
+	form(action="#")
+		+formInputs(myForm)
+		button Submit
+
+//- 'socLinks' is template for list of social media links.
+//- Usage example:
+	ul.row.Ml-2gg
+		- for(i = 0; i < socLinks.length; i++)
+			li.row__item.Ml2gg.Mb1gg
+				a.soc-link.mFz0.icon(class="icon--"+socLinks[i].icon href=socLinks[i].link target="blank")= socLinks[i].label
+
+//- 'absolutePath' is string for path part which can change
+//- in deployment to production
+//- Usage example:
+	- absolutePath = "site.com"
+	img(src=absolutePath+"/data/180928/1545028344323005.jpg" alt="")
+
+//- 'i' and 'j' is variables for cycles declared in advance.

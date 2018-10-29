@@ -1,7 +1,10 @@
+//- Variables and templates for arrays of data which need for most projects.
+//- See documentation and examples in vars-doc.pug.
+
 -
 	var pageTitle = "Index",
-	products = [
-		{title: "Product", price: "1000"},
+	features = [
+		{title: "Feature", descr: "Simple text"},
 	],
 	siteMap = [
 		{title: "Site map section", list: [
@@ -10,7 +13,10 @@
 		},
 	],
 	myForm = [
-			{id: "form-name", placeholder: "Имя", type: "text", name: "name", required: ""},
+		{
+			label: "",
+			input: {id: "form-name", placeholder: "Имя", type: "text", name: "name", required: ""},
+		},
 	],
 	socLinks = [
 		{icon: "fb", label: "Facebook", link: "#"},
