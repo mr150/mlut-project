@@ -2,11 +2,12 @@ src/core-blocks
 src/core-utils
 src/sass/base
 src/sass/mlut.scss
-src/sass/includes/**/*
-!src/sass/includes/_settings.scss
+src/sass/includes/_settings.scss
+src/sass/includes/_mixins.scss
+src/sass/includes/_functions.scss
 
-src/img/sprite-parts/**/*
-!src/img/sprite-parts/.gitkeep
+src/img/assets/**/*
+!src/img/assets/.gitkeep
 
 src/css/style.css
 
