@@ -17,6 +17,7 @@ var gulp = require("gulp"),
 		tabify = require("gulp-tabify"),
 		size = require("gulp-size"),
 		htmlValid = require("gulp-w3c-html-validation"),
+		purgecss = require("gulp-purgecss"),
 		sourcemaps = require("gulp-sourcemaps"),
 		autoprefixer = require("gulp-autoprefixer");
 
@@ -102,6 +103,12 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(autoprefixer({
 			cascade: false,
 			flexbox: false
+		}))
+		.pipe(purgecss({
+			content: [
+				dirs.src + files.html,
+				path.src.js + files.js
+			]
 		}))
 		.pipe(tabify(2, false))
 		.pipe(gulp.dest(path.src.css))
