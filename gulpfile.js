@@ -138,6 +138,24 @@ gulp.task("css-lint", function(){
 		}));
 });
 
+gulp.task("css-update", function(){
+	return gulp.src(path.src.css + "style.css")
+		.pipe(purgecss({
+			content: [
+				dirs.src + files.html,
+				path.src.js + files.js
+			]
+		}))
+		.pipe(cleancss({
+			level: 2,
+			compatibility: "ie8"
+		}))
+		.pipe(rename(files.distCss))
+		.pipe(gulp.dest(path.build.css))
+		.pipe(size(sizeConfig))
+		.pipe(gulp.dest(path.src.css))
+});
+
 gulp.task("scripts", function(){
 	return gulp.src(path.src.js + "script.js")
 		.pipe(plumber())
@@ -180,8 +198,8 @@ gulp.task("html", function(){
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
 	gulp.watch(path.watch.styles, ["style"]);
 	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, ["html"]);
-	gulp.watch(path.watch.js, ["scripts"]);
+	gulp.watch(path.watch.html, ["html", "css-update"]);
+	gulp.watch(path.watch.js, ["scripts", "css-update"]);
 });
 
 gulp.task("imgmin", ["jpgmin"], function(){
