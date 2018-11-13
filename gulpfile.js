@@ -104,14 +104,14 @@ gulp.task("style", ["css-lint"], function(){
 			cascade: false,
 			flexbox: false
 		}))
+		.pipe(tabify(2, false))
+		.pipe(gulp.dest(path.src.css))
 		.pipe(purgecss({
 			content: [
 				dirs.src + files.html,
 				path.src.js + files.js
 			]
 		}))
-		.pipe(tabify(2, false))
-		.pipe(gulp.dest(path.src.css))
 		.pipe(cleancss({
 			level: 2,
 			compatibility: "ie8"
