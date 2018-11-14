@@ -127,8 +127,7 @@ gulp.task("style", ["css-lint"], function(){
 gulp.task("css-lint", function(){
 	return gulp.src([
 		path.src.fonts + "*.css",
-		path.src.blocks + files.styles,
-		path.src.utils + files.styles,
+		"!" + path.src.sass + "includes/_{mixins,functions}.scss",
 		path.src.sass + files.styles
 	])
 		.pipe(stylelint({

@@ -62,7 +62,7 @@ For writing html by default is used [Pug](https://github.com/pugjs/pug) template
 
 For html validation, a [gulp-w3c-html-validation](https://github.com/Aakash-Goel/gulp-w3c-html-validation) is used. It creates a file with the result of the check in the `logs/` directory. I do not know how to disable this report so the `logs/` is simply ignored by git.
 
-For writing styles is used [LibSass](https://github.com/sass/libsass) (scss syntax).
+For writing styles is used [LibSass](https://github.com/sass/libsass) (SCSS syntax).
 
 All styles should be written or included in `src/sass/style.scss`:
 ```scss
@@ -74,9 +74,9 @@ Scripts similarly should be written or included in `src/js/script.js`. To store 
 //= includes/block.js
 ```
 
-All styles from `src/sass/` will be linted by [Stylelint](https://github.com/stylelint/stylelint). 
+All styles from `src/sass/` will be linted by [Stylelint](https://github.com/stylelint/stylelint). CSS properties order is linted according to [rational order](https://github.com/constverum/stylelint-config-rational-order) but not so strict.
 
-In the process of assembling styles, the [purgecss](https://github.com/FullHuman/purgecss) is used. If the css class is not used in html or js, it will be deleted from assembled css file.
+In the process of assembling styles, the [purgecss](https://github.com/FullHuman/purgecss) is used. If the CSS class is not used in html or js, it will be deleted from assembled CSS file.
 
 For store third party libs use `src/libs/` directory. Files from this directory is not linted. Also they is ignored by git except for `mlut.*` files.
 
@@ -90,7 +90,7 @@ Files in which you can find configs:
 - `src/sass/includes/_settings.scss` - MLUT styles settings and compilation flags
 
 ### Assets ###
-Images put in `src/img/` directory. All images from there will be minified except for those in the `src/img/assets/`. This directory is needed to store additional files like a parts of css sprites. By default it ignored by git.
+Images put in `src/img/` directory. All images from there will be minified except for those in the `src/img/assets/`. This directory is needed to store additional files like a parts of CSS sprites. By default it ignored by git.
 
 By default, [guetzli](https://github.com/google/guetzli) with [mozjpeg](https://github.com/mozilla/mozjpeg) is used for jpg images minification. Guetzli consumes a lot of CPU and RAM, and also works slowly. If you have a weak computer or you don't want to wait, then turn it off in the `gulpfile.js`. By default for guetzli is set a limit on RAM consumption of 1GB.
 
@@ -109,11 +109,11 @@ You can link assembled MLUT files to page. For get all dist, enter:
 ```
 npm run mlut-dist
 ```
-If you want to link only css, execute:
+If you want to link only CSS, execute:
 ```
 npm run mlut-get-css
 ```
-or similarly for get scss if you want include it to `style.scss`
+or similarly for get SCSS if you want include it to `style.scss`
 ```
 npm run mlut-get-scss
 ```
