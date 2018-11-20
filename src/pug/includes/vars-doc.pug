@@ -14,15 +14,19 @@
 				h3= features[i].title 
 				p= features[i].descr 
 
-//- 'siteMap' is list template for site map in footer of site. 
+//- 'siteMapData' is list template for site map in footer of site. 
 //- Usage example:
 	h2 Site map
-	- for(i = 0; i < siteMap.length; i++)
+	- for(i = 0; i < siteMapData.length; i++)
 		.row__col.W3gc_md
-			h3= siteMap[i].title
+			h3= siteMapData[i].title
 			ul
-				- for(j = 0; j < siteMap[i].list.length; j++)
-					li: a(href=siteMap[i].list[j].link)= siteMap[i].list[j].label
+				- for(j = 0; j < siteMapData[i].list.length; j++)
+					li: a(href=siteMapData[i].list[j].link)= siteMapData[i].list[j].label
+
+//- Or with 'siteMap' mixin:
+	h2.mV-vh Site map
+	+siteMap(siteMapData, "row__col W2gc_sm W4gc_md", "", "reset")
 
 //- 'myForm' is template for list of objects which contains
 //- labels and attributes of inputs. It using in 'formInputs' mixin.
