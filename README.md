@@ -1,5 +1,5 @@
 # MLUT project #
-Project template for development with [MLUT](https://bitbucket.org/MrZidan150/mlut-lib/).
+Project template for development with [MLUT](https://github.com/mr150/mlut).
 
 ## System requirements ##
 - [Node.js](https://nodejs.org/en/)
@@ -7,9 +7,9 @@ Project template for development with [MLUT](https://bitbucket.org/MrZidan150/ml
 
 ## Installation ##
 ```
-git clone https://MrZidan150@bitbucket.org/MrZidan150/mlut-project.git
+git clone https://github.com/mr150/mlut-project.git
 cd mlut-project
-npm install
+npm i
 ```
 
 ## Build the project ##
