@@ -1,0 +1,17 @@
+// Write variables for you project here
+
+// Dev paths
+$absolute-path: "../img/";
+
+// Production paths
+//$absolute-path: "";
+
+// Map with icons data for css sprite
+$icons: (
+	"": (21px, 21px, -5px, -5px),
+);
+
+// Map with paths to background images
+$Bgi-map: (
+	"icons": $absolute-path + "icons-sprite.png",
+);
