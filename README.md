@@ -157,7 +157,7 @@ Then you can import blocks, utilities and use sass tools:
 
 @include mlu-bpm($mlu-bp-md) {
 	.input--common {
-		padding: mlu-px2em(16px) 16;
+		padding: mlu-px2em(16px) 16px;
 	}
 }
 ```

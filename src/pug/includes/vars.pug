@@ -2,6 +2,9 @@
 //- See documentation and examples in vars-doc.pug.
 
 -
+	var siteUrl = "";
+	var absolutePath = siteUrl;
+
 	var pageTitle = "Index",
 	features = [
 		{title: "Feature", descr: "Simple text"},
@@ -23,5 +26,9 @@
 		{icon: "ins", label: "Instagram", link: "#"},
 		{icon: "vk", label: "Вконтакте", link: "#"},
 	],
-	absolutePath = "",
+	styles = {
+	},
+	images = {
+		logo: {src: absolutePath + "/data/190226/2136184881629692.jpg", alt: "logo"},
+	},
 	i, j = 0;

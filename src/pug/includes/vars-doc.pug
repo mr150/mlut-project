@@ -1,5 +1,8 @@
 //- Short documentation for vars.pug with usage examples
 
+//- 'absolutePath' is string for path part which can change
+//- in deployment to production. Usage example see below.
+
 //- 'pageTitle' is page title which will be in <title>.
 //- Setup it before including head.pug. Example:
 	- pageTitle = "Mlut project";
@@ -42,10 +45,19 @@
 			li.row__item.Ml2gg.Mb1gg
 				a.soc-link.mFz0.icon(class="icon--"+socLinks[i].icon href=socLinks[i].link target="blank")= socLinks[i].label
 
-//- 'absolutePath' is string for path part which can change
-//- in deployment to production
+//- 'styles' is an object in which strings with CSS utilities are stored,
+//- for substitution into class attribute.
 //- Usage example:
-	- absolutePath = "site.com"
-	img(src=absolutePath+"/data/180928/1545028344323005.jpg" alt="")
+	- styles = {
+		btnSmall: "P2su Fz-h6 Fw700 Tt Bdrs-df Trs-all",
+	};
+	button.btn(class=styles.btnSmall) Next
+
+//- 'images' is an object in which images data are stored.
+//- Usage example:
+	- images = {
+		logo: {src: absolutePath + "/data/190226/2136184881629692.jpg", alt: "logo"},
+	};
+	img&attributes(images.logo)
 
 //- 'i' and 'j' is variables for cycles declared in advance.
