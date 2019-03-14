@@ -229,6 +229,18 @@ gulp.task("jpgmin", function(){
 		.pipe(gulp.dest(path.build.img));
 });
 
+gulp.task("jpgmin100", function(){
+	return gulp.src(path.src.img + "*.jpg")
+		.pipe(imagemin([
+			guetzli({
+				quality: "100",
+				memlimit: 1024
+			}),
+			imagemin.jpegtran({progressive: true}),
+		]))
+		.pipe(gulp.dest(path.build.img));
+});
+
 gulp.task("clear", function(){
 	return del.sync(dirs.build);
 });

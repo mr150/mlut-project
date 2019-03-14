@@ -8,7 +8,6 @@
 			"custom-properties",
 			"declarations",
 			"rules",
-			"at-rules",
 		],
 		"order/properties-order": [
 			"position",
@@ -103,7 +102,6 @@
 		"function-comma-newline-before": "never-multi-line",
 		"function-max-empty-lines": 0,
 		"function-name-case": "lower",
-		"function-url-quotes": "always",
 		"function-whitespace-after": "always",
 		"function-parentheses-space-inside": "never",
 		"keyframe-declaration-no-important": true,
