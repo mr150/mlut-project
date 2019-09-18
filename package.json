@@ -8,9 +8,10 @@
 		"imgmin": "./node_modules/gulp/bin/gulp.js imgmin",
 		"mlut-dist": "cp node_modules/mlut/dist src/libs/mlut -r",
 		"mlut-get-css": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/",
+		"mlut-get-js": "cp node_modules/mlut/dist/js/mlut.min.js src/libs/",
 		"mlut-get-scss": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/mlut.min.scss",
 		"mlut-scss": "cat src/sass/mlut.scss > src/sass/style.scss && rm src/sass/mlut.scss",
-		"mlut-src": "cp node_modules/mlut/src/core-* src/ -r && cp node_modules/mlut/src/sass src/ -r"
+		"mlut-src": "cp node_modules/mlut/src/sass/* src/sass/ -r && cp node_modules/mlut/src/js/core src/js/ -r"
 	},
 	"author": "mr150",
 	"license": "MIT",
@@ -41,7 +42,7 @@
 		"imagemin-guetzli": "^2.0.0",
 		"imagemin-mozjpeg": "^8.0.0",
 		"imagemin-pngquant": "^8.0.0",
-		"mlut": "../mlut-lib",
+		"mlut": "^3.0.0",
 		"stylelint": "^10.1.0",
 		"stylelint-order": "^3.1.0"
 	}
