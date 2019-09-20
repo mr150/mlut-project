@@ -1,0 +1,16 @@
+-
+	// Concatenates strings passed as arguments with a space.
+	// Used to concat strings with utilities from `css` object.
+	// Accepts any number of arguments.
+	// Example:
+	// cssCat("Fw700 Fz-h1", "Maw-fx0 Ml1gg") -> "W3c Fw700 Fz-h1 Maw-fx0 Ml1gg"
+
+	function cssCat() {
+		return [].join.call(arguments, " ");
+	}
+
+	// Used to set the background image in markup with `style` attribute.
+
+	function toBgi(img) {
+		return "background-image: url(" + img + ");"
+	}

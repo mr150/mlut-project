@@ -29,8 +29,6 @@ var dirs = {
 
 var path = {
 	src: {
-		blocks: dirs.src + "core-blocks/",
-		utils: dirs.src + "core-utils/",
 		css: dirs.src + "css/",
 		sass: dirs.src + "sass/",
 		js: dirs.src + "js/",
@@ -50,10 +48,8 @@ var files = {
 	styles: "**/*.{scss,css}",
 	js: "**/*.js",
 	pug: "**/*.pug",
-	img: "*.{png,jpg,svg}",
+	img: "*.{png,jpg,svg,webp}",
 	html: "**/*.html",
-	distCss: "style.min.css",
-	distJs: "script.min.js",
 	all: "**/*"
 };
 
@@ -61,8 +57,6 @@ path = Object.assign({
 	watch: {
 		styles: [
 			path.src.fonts + "*.{scss,css}",
-			path.src.blocks + files.styles,
-			path.src.utils + files.styles,
 			dirs.libs + files.styles,
 			path.src.sass + files.styles
 		],
@@ -70,8 +64,7 @@ path = Object.assign({
 		html: dirs.src + files.html,
 		js: [
 			path.src.js + "script.js",
-			path.src.js + "includes/" + files.js,
-			path.src.blocks + files.js,
+			path.src.js + "*/" + files.js,
 			dirs.libs + files.js
 		]
 	}
@@ -84,14 +77,27 @@ var servConfig = {
 	notify: false,
 	open: false
 },
-		sizeConfig = {
-			gzip: true,
-			pretty: false,
-			showFiles: true
-		};
+sizeConfig = {
+	gzip: true,
+	pretty: false,
+	showFiles: true
+};
 
-gulp.task("style", ["css-lint"], function(){
-	return gulp.src(path.src.sass + "style.scss")
+gulp.task("css-lint", function(){
+	return gulp.src([
+		path.src.fonts + "*.css",
+		"!" + path.src.sass + "**/_*.scss",
+		path.src.sass + files.styles
+	], {allowEmpty: true})
+		.pipe(stylelint({
+			reporters:[
+				{formatter: "string", console: true}
+			]
+		}));
+});
+
+gulp.task("style", gulp.series("css-lint", function(){
+	return gulp.src(path.src.sass + "*.scss", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
@@ -116,29 +122,19 @@ gulp.task("style", ["css-lint"], function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename(files.distCss))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.src.css))
 		.pipe(browserSync.stream());
-});
-
-gulp.task("css-lint", function(){
-	return gulp.src([
-		path.src.fonts + "*.css",
-		"!" + path.src.sass + "includes/_{mixins,functions}.scss",
-		path.src.sass + files.styles
-	])
-		.pipe(stylelint({
-			reporters:[
-				{formatter: "string", console: true}
-			]
-		}));
-});
+}));
 
 gulp.task("css-update", function(){
-	return gulp.src(path.src.css + "style.css")
+	return gulp.src([
+		path.src.css + "*.css",
+		"!" + path.src.css + "*.min.css"
+	])
 		.pipe(purgecss({
 			content: [
 				dirs.src + files.html,
@@ -149,21 +145,21 @@ gulp.task("css-update", function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename(files.distCss))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.src.css))
 });
 
 gulp.task("scripts", function(){
-	return gulp.src(path.src.js + "script.js")
+	return gulp.src(path.src.js + "script.js", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
 		.pipe(rename("scripts.js"))
 		.pipe(gulp.dest(path.src.js))
 		.pipe(uglify())
-		.pipe(rename(files.distJs))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(size(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(sourcemaps.write(""))
@@ -172,7 +168,7 @@ gulp.task("scripts", function(){
 });
 
 gulp.task("pug", function(){
-	return gulp.src(path.src.pug + "*.pug")
+	return gulp.src(path.src.pug + "*.pug", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(pug({"pretty": "\t"}))
 		.pipe(gulp.dest(dirs.src))
@@ -184,7 +180,7 @@ gulp.task("server", function(){
 });
 
 gulp.task("html", function(){
-	return gulp.src(dirs.build + files.html)
+	return gulp.src(dirs.build + files.html, {allowEmpty: true})
 		.pipe(htmlValid({
 			generateReport: false,
 			reportpath: false,
@@ -194,29 +190,15 @@ gulp.task("html", function(){
 		.pipe(browserSync.stream());
 });
 
-gulp.task("default", ["server", "style", "pug", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style"]);
-	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, ["html", "css-update"]);
-	gulp.watch(path.watch.js, ["scripts", "css-update"]);
-});
-
-gulp.task("imgmin", ["jpgmin"], function(){
-	return gulp.src(path.src.img + "*.{png,svg}")
-		.pipe(imagemin([
-			imagemin.optipng({optimizationLevel: 3}),
-			pngquant({quality: "85"}),
-			imagemin.svgo()
-		]))
-		.pipe(size({
-			gzip: true,
-			showFiles: true
-		}))
-		.pipe(gulp.dest(path.build.img));
-});
+gulp.task("default", gulp.parallel("server", "style", "pug", "scripts", function(){
+	gulp.watch(path.watch.styles, gulp.series("style"));
+	gulp.watch(path.watch.pug, gulp.series("pug"));
+	gulp.watch(path.watch.html, gulp.parallel("html", "css-update"));
+	gulp.watch(path.watch.js, gulp.parallel("scripts", "css-update"));
+}));
 
 gulp.task("jpgmin", function(){
-	return gulp.src(path.src.img + "*.jpg")
+	return gulp.src(path.src.img + "*.jpg", {allowEmpty: true})
 		.pipe(imagemin([
 			guetzli({
 				quality: "90",
@@ -230,7 +212,7 @@ gulp.task("jpgmin", function(){
 });
 
 gulp.task("jpgmin100", function(){
-	return gulp.src(path.src.img + "*.jpg")
+	return gulp.src(path.src.img + "*.jpg", {allowEmpty: true})
 		.pipe(imagemin([
 			guetzli({
 				quality: "100",
@@ -241,15 +223,37 @@ gulp.task("jpgmin100", function(){
 		.pipe(gulp.dest(path.build.img));
 });
 
-gulp.task("clear", function(){
-	return del.sync(dirs.build);
+gulp.task("imgmin", gulp.series("jpgmin", function(){
+	return gulp.src(path.src.img + "*.{png,svg}", {allowEmpty: true})
+		.pipe(imagemin([
+			imagemin.optipng({optimizationLevel: 3}),
+			pngquant({
+				quality: [0.75, 0.8],
+				strip: true
+			}),
+			imagemin.svgo({
+				plugins: [
+					{removeViewBox: true},
+				]
+			})
+		]))
+		.pipe(size({
+			gzip: true,
+			showFiles: true
+		}))
+		.pipe(gulp.dest(path.build.img));
+}));
+
+gulp.task("clear", function(cb){
+	del.sync(dirs.build);
+	cb();
 });
 
-gulp.task("build", ["clear", "style", "pug", "scripts", "imgmin"], function(){
+gulp.task("build", gulp.series("clear", "style", "pug", "scripts", "imgmin", function(){
 	return gulp.src([
 		"!"+path.src.fonts + "*.{scss,css}",
 		path.src.fonts + files.all
-	])
+	], {allowEmpty: true})
 		.pipe(gulp.dest(path.build.fonts));
-});
+}));
 

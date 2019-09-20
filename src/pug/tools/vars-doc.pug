@@ -11,9 +11,9 @@
 //- 'features' is common template for data list.
 //- Usage example:
 	h2 Our features
-	ul.row.wrapper__row
+	ul.row.Mx-1gg
 		- for(i = 0; i < features.length; i++)
-			li.row__col.W2gc_md.W3gc_md
+			li.row__col.W2c_sm.W3c_md
 				h3= features[i].title 
 				p= features[i].descr 
 
@@ -21,7 +21,7 @@
 //- Usage example:
 	h2 Site map
 	- for(i = 0; i < siteMapData.length; i++)
-		.row__col.W3gc_md
+		.row__col.W3c_md
 			h3= siteMapData[i].title
 			ul
 				- for(j = 0; j < siteMapData[i].list.length; j++)
@@ -29,7 +29,7 @@
 
 //- Or with 'siteMap' mixin:
 	h2.mV-vh Site map
-	+siteMap(siteMapData, "row__col W2gc_sm W4gc_md", "", "mAll-sr")
+	+siteMap(siteMapData, "row__col W2c_sm W4c_md", "", "mAll-sr")
 
 //- 'myForm' is template for list of objects which contains
 //- labels and attributes of inputs. It using in 'formInputs' mixin.
@@ -45,13 +45,13 @@
 			li.row__item.Ml2gg.Mb1gg
 				a.soc-link.mFz0.icon(class="icon--"+socLinks[i].icon href=socLinks[i].link target="blank")= socLinks[i].label
 
-//- 'styles' is an object in which strings with CSS utilities are stored,
+//- 'css' is an object in which strings with CSS utilities are stored,
 //- for substitution into class attribute.
 //- Usage example:
-	- styles = {
-		btnSmall: "P2su Fz-h6 Fw700 Tt Bdrs-df Trs-all",
+	- css = {
+		btnSmall: "P2su Fz-h6 Fw700 Tt Bdrs-sh0 Trs-all",
 	};
-	button.btn(class=styles.btnSmall) Next
+	button.btn(class=css.btnSmall) Next
 
 //- 'images' is an object in which images data are stored.
 //- Usage example:
