@@ -11,6 +11,8 @@ src/css/style.css
 src/**/*.map
 
 src/js/core
+src/js/modules
+src/js/tools
 src/js/scripts.js
 src/js/mlut.js
 
