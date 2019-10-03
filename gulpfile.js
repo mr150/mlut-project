@@ -273,6 +273,18 @@ gulp.task("pngmin", function(){
 		.pipe(gulp.dest(path.build.img));
 });
 
+gulp.task("svg-sprite", function(){
+	return gulp.src(path.src.imgAssets + "*.svg", {allowEmpty: true})
+		.pipe(rename({prefix: "icon-"}))
+		.pipe(svgStore({inlineSvg: true}))
+		.pipe(size({
+			gzip: true,
+			showFiles: true
+		}))
+		.pipe(rename("sprite.svg"))
+		.pipe(gulp.dest(path.src.img));
+});
+
 gulp.task("imgmin", gulp.parallel("jpgmin", "webpmin", "pngmin"));
 
 gulp.task("clear", function(cb){

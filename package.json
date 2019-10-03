@@ -5,6 +5,9 @@
 	"scripts": {
 		"gulp": "./node_modules/gulp/bin/gulp.js",
 		"build": "./node_modules/gulp/bin/gulp.js build",
+		"compile": "./node_modules/gulp/bin/gulp.js compile",
+		"ftp": "./node_modules/gulp/bin/gulp.js ftp",
+		"svg-sprite": "./node_modules/gulp/bin/gulp.js svg-sprite",
 		"imgmin": "./node_modules/gulp/bin/gulp.js imgmin",
 		"mlut-dist": "cp node_modules/mlut/dist src/libs/mlut -r",
 		"mlut-dist-css": "cp node_modules/mlut/dist/css/mlut.min.css src/libs/",
