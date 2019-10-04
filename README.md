@@ -33,29 +33,42 @@ gulp
 ```
 server start in `src/` folder by default and your `src/index.html` will be on `localhost:3000`.
 
-To stop dev server press `Ctrl + c` in your terminal
+To stop dev server press `Ctrl + c` in your terminal.
+
+For all other basic commands, the name of the npm scripts coincides with the name of the gulp tasks.
 
 #### Build ####
 To build project without watcher, execute:
 ```
-npm run build
-```
-or
-```
 gulp build
 ```
+also you can only compile files without a complete build:
+```
+gulp compile
+```
+All code for production are in `dist/` folder.
 
 #### Minify images ####
-```
-npm run imgmin
-```
-or
 ```
 gulp imgmin
 ```
 You can minify images with `build` task too.
 
-All code for production are in `dist/` folder.
+#### Upload to ftp ####
+First you need to specify some data in the `gulpfile.js`:
+- `dirs.ftp` - project folder on the server
+- `ftpConfig` - hostname, username, etc
+
+and then:
+```
+gulp ftp
+```
+
+#### Create svg sprite ####
+```
+gulp svg-sprite
+```
+Gulp collects all the svg files from the `src/img/assets` into the sprite. The sprite is placed in `src/img` and has the name `sprite.svg`. Symbols ids are set according to the scheme: "icon-`filename`".
 
 ### Code ###
 For writing HTML by default is used [Pug](https://github.com/pugjs/pug) template engine. Files from `src/pug/` will be compiled to HTML in `src/` except those in the sub folders. `src/pug/includes/` contains fragments for reuse on different pages. In `src/pug/tools/` you can find variables with templates for data, useful functions and mixins. If you don't want use pug, delete `src/pug/` folder from the project.
@@ -90,7 +103,7 @@ Files in which you can find configs:
 - `src/sass/tools/_settings.scss` - MLUT styles settings and compilation flags
 
 ### Assets ###
-Images put in `src/img/` directory. All images from there will be minified except for those in the `src/img/assets/`. This directory is needed to store additional files like a parts of CSS sprites. By default it ignored by git.
+Images put in `src/img/` directory. All images from there will be minified except for those in the `src/img/assets/`. This directory is needed to store additional files like a parts of sprites. By default it ignored by git.
 
 By default, [guetzli](https://github.com/google/guetzli) with [mozjpeg](https://github.com/mozilla/mozjpeg) is used for jpg images minification. Guetzli consumes a lot of CPU and RAM, and also works slowly. If you have a weak computer or you don't want to wait, then turn it off in the `gulpfile.js`. By default for guetzli is set a limit on RAM consumption of 1GB.
 
@@ -117,7 +130,7 @@ and for JS
 ```
 npm run mlut-dist-js
 ```
-or similarly for get CSS with `scss` suffix, if you want include it to `style.scss`
+or similarly for get CSS file with `scss` extension, if you want include it to `style.scss`
 ```
 npm run mlut-dist-scss
 ```
