@@ -285,7 +285,7 @@ gulp.task("svg-sprite", function(){
 		.pipe(gulp.dest(path.src.img));
 });
 
-gulp.task("imgmin", gulp.parallel("jpgmin", "webpmin", "pngmin"));
+gulp.task("imgmin", gulp.parallel("jpgmin", "pngmin"));
 
 gulp.task("clear", function(cb){
 	del.sync(dirs.build);
