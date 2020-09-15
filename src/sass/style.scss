@@ -1,22 +1,44 @@
 @charset "utf-8";
 
 /*
-@import "tools/settings";
-@import "tools/functions";
-@import "tools/mixins";
+@import "../../node_modules/mlut/src/sass/tools/settings";
+@import "../../node_modules/mlut/src/sass/tools/functions";
+@import "../../node_modules/mlut/src/sass/tools/mixins";
 
 @import "includes/vars";
+
+@import "../../node_modules/mlut/src/sass/core/variables";
 */
 
 //include if use custom web font
-//@import "core/system-font";
+//@import "../../node_modules/mlut/src/sass/core/system-font";
 
 /*===CORE-BLOCKS===*/
-//@import "core/blocks/wrapper";
-
+/*
+@import "../../node_modules/mlut/src/sass/core/blocks/btn";
+@import "../../node_modules/mlut/src/sass/core/blocks/inp";
+@import "../../node_modules/mlut/src/sass/core/blocks/row";
+@import "../../node_modules/mlut/src/sass/core/blocks/wrapper";
+@import "../../node_modules/mlut/src/sass/core/blocks/ratio-block";
+*/
 /*===DESIGN BLOCKS===*/
 
 /*===CORE-UTILS===*/
-//@import "core/utils/display";
+/*
+@import "../../node_modules/mlut/src/sass/core/utils/custom";
+@import "../../node_modules/mlut/src/sass/core/utils/position";
+@import "../../node_modules/mlut/src/sass/core/utils/display";
+@import "../../node_modules/mlut/src/sass/core/utils/flex";
+@import "../../node_modules/mlut/src/sass/core/utils/layout";
+@import "../../node_modules/mlut/src/sass/core/utils/box-sizing";
+@import "../../node_modules/mlut/src/sass/core/utils/margin";
+@import "../../node_modules/mlut/src/sass/core/utils/padding";
+@import "../../node_modules/mlut/src/sass/core/utils/text";
+@import "../../node_modules/mlut/src/sass/core/utils/font";
+@import "../../node_modules/mlut/src/sass/core/utils/border";
+@import "../../node_modules/mlut/src/sass/core/utils/background";
+@import "../../node_modules/mlut/src/sass/core/utils/misc";
+@import "../../node_modules/mlut/src/sass/core/utils/visual-formatting";
+*/
 
 /*===DESIGN-UTILS===*/

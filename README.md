@@ -153,16 +153,16 @@ And just add MLUT classes to markup:
 ```
 
 ### Toolkit ###
-You can get MLUT sources for using full toolkit: sass mixins, functions, utilities etc. Also you can create custom bundle, themes etc.
+You can get MLUT sources for using full toolkit: sass mixins, functions, utilities etc. Also you can create custom bundle, themes etc. Just import files from `node_modules/mlut/src/`. Import examples are already prepared in the file comments `src/sass/style.scss`.
 
-For get sources:
+Also you can get MLUT sources locally:
 ```
 npm run mlut-src
 ```
 After that sources appear in `src/` folder.
 
 #### Styles ####
-To get started, uncomment imports of sass settings and tools in `src/sass/style.scss`:
+To get started, import sass settings and tools in `src/sass/style.scss`:
 ``` scss
 @import "tools/settings";
 @import "tools/functions";
