@@ -84,7 +84,7 @@
 		"declaration-block-semicolon-space-before": "never",
 		"declaration-block-trailing-semicolon": "always",
 		"declaration-block-no-shorthand-property-overrides": true,
-		"declaration-property-value-blacklist": {
+		"declaration-property-value-disallowed-list": {
 			"outline": [
 				"none"
 			]
